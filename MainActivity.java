@@ -55,6 +55,15 @@ public class TicTac
             {
                 System.out.println(board);
                 
+                if(player == 'X')
+                {
+                    player = 'O';
+                }
+                else
+                {
+                    player = 'X';
+                }
+                
             }
         }
         char winner = board.getWinner();
