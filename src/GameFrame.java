@@ -39,10 +39,19 @@ public class GameFrame extends JFrame{
         newMenu.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                remove(main);
+                getContentPane().removeAll();
                 board = new Board();
                 GamePanel boardFrame = new GamePanel(board);
                 add(boardFrame);
+                repaint();
+            }
+        });
+        newMenu.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                getContentPane().removeAll();
+                add(main);
+                repaint();
             }
         });
     }
@@ -55,8 +64,7 @@ public class GameFrame extends JFrame{
             startButton = new JButton();
 
             startButton.setBounds(135,175,225,85);
-            startButton.setOpaque(true);
-            startButton.setContentAreaFilled(true);
+            startButton.setOpaque(false);
             startButton.setBorderPainted(false);
 
             add(startButton);
