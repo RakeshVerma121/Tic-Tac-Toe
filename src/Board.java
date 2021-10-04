@@ -1,26 +1,29 @@
 import java.util.ArrayList;
+
+// the board class keeps a representation of the board, and updates a winSet if the game is won
 public class Board{
     private boolean isXTurn;
     private boolean isFinished;
     private int[][] board;
     private ArrayList<int[]> winSet;
-    public Board(){
 
+    // constructor, sets up some of our instance variables
+    public Board(){
         isXTurn = true;
         isFinished = false;
-
         winSet = new ArrayList<>();
         board = new int[3][3];
     }
+    // put a value on the board, 1 represents X and -1 represents O
     public void put(int x, int y){
         board[x][y] = isXTurn ? 1 : -1;
-        if (checkWin(x,y)){
+        if (checkWin(x,y)){ // check if it won at every put
             isFinished = true;
         }
-        isXTurn = !isXTurn;
+        isXTurn = !isXTurn; // switch from x to o's turn, we handle this here, not at the GUI
     }
     public ArrayList<int[]> getWinSet(){
-        return winSet;
+        return winSet; // return the winset, only called if finished, only finished if won, only won if our winset contains a win
     }
     public boolean isFinished(){
         return isFinished;
@@ -28,8 +31,9 @@ public class Board{
     public boolean isXTurn(){
         return isXTurn;
     }
+    // check if the game state is a winning one
     public boolean checkWin(int x, int y){
-        int target = isXTurn ? 3 : -3;
+        int target = isXTurn ? 3 : -3; // a turnary, read as int target = 0; if(isXTurn){ target = 3 }else{ target = -3;}
         return (checkVertical(target,y) || checkHorizontal(target,x) || checkDiagonal(target,x,y));
     }
     private boolean checkHorizontal(int target, int x){
@@ -38,6 +42,7 @@ public class Board{
                 winSet.add(new int[]{x,i});
             }
         }
+        // if winSet < 3 then we aint got a winning ticket
         if (winSet.size() == 3){
             return true;
         }
