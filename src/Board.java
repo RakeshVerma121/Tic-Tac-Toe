@@ -34,7 +34,7 @@ public class Board{
                                 labels[x_coord][y_coord].setEnabled(false);
                                 board[x_coord][y_coord] = 1;
                                 if (checkWin(x_coord,y_coord)){
-
+                                    
                                 }
                                 xTurn = !xTurn;
                             }
@@ -62,6 +62,8 @@ public class Board{
                 labels[i][j].setOpaque(true);
                 labels[i][j].setVisible(true);
                 panel.add(labels[i][j]);
+
+
             }
 
         }

@@ -10,7 +10,6 @@ public class GameFrame extends JFrame{
     private JMenuBar menuBar;
 
     private JMenuItem newMenu;
-    private JMenuItem bestMove;
     private JMenuItem mainMenu;
 
     private Board board;
