@@ -117,37 +117,25 @@ public class GameFrame extends JFrame{
                 }
             }
         }
-        // listeners for every label
+        // mouse listeners for every label, click to fill instead of pressing x or o specifically
         public void createListeners(int x_coord, int y_coord){
-            labels[x_coord][y_coord].addKeyListener(new KeyAdapter(){
-                public void keyPressed(KeyEvent e){
-                    int key = e.getKeyCode();
-                    if (!board.isFinished()){ 
-                        if (key == 88 || key == 79){
-                            if (board.isXTurn()){
-                                labels[x_coord][y_coord].setText("X");
-                                labels[x_coord][y_coord].setEnabled(false);
-                                board.put(x_coord,y_coord);
-                            } else {
-                                labels[x_coord][y_coord].setText("O");
-                                labels[x_coord][y_coord].setEnabled(false);
-                                board.put(x_coord,y_coord);
-                            }
-                        }
-                        if (board.isFinished()){
-                            for (int[] win : board.getWinSet()){
-                                labels[win[0]][win[1]].setForeground(Color.red);
-                            }
-                        }
-                    }
-                }
-                
-            });
-            // we set the focus if we press with mouse, otherwise we wouldn't be able to fill a specific label!
             labels[x_coord][y_coord].addMouseListener(new MouseInputAdapter(){
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    labels[x_coord][y_coord].requestFocus();  
+                    if (board.isXTurn()){
+                        labels[x_coord][y_coord].setText("X");
+                        labels[x_coord][y_coord].setEnabled(false);
+                        board.put(x_coord,y_coord);
+                    } else {
+                        labels[x_coord][y_coord].setText("O");
+                        labels[x_coord][y_coord].setEnabled(false);
+                        board.put(x_coord,y_coord);
+                    }
+                    if (board.isFinished()){
+                        for (int[] win : board.getWinSet()){
+                            labels[win[0]][win[1]].setForeground(Color.red);
+                        }
+                    }
                 }
             });
         }
